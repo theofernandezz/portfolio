@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Theo Fernandez Beraldi</title>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <header>
+      <nav class="nav-bar container">
+        <ul>
+          <li><a href="#hero">Home</a></li>
+          <li><a href="#About">About Me</a></li>
+          <li><a href="#Projects">Projects</a></li>
+          <li><a href="#Contact">Contact Me</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+      <div class="hero-container">
+        <h1>Theo Fernandez Beraldi</h1>
+        <p>Full Stack Developer</p>
+        <div class="hero-buttons">
+          <button class="primary-btn">
+            <a href="#Projects">View My Work</a>
+          </button>
+          <div class="social-icons">
+            <a href="https://github.com/theo" target="_blank">
+              <i class="bx bxl-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/theo" target="_blank">
+              <i class="bx bxl-linkedin-square"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Me Section -->
+    <section id="About">
+      <div class="about-container container">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+          <div class="about-info">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non
+              ipsa, iste totam, laudantium obcaecati temporibus deserunt sit est
+              velit ad facilis voluptas blanditiis pariatur? Libero
+              exercitationem placeat laborum ad maiores.
+            </p>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis
+              nulla nam labore et eum nisi molestias dolorem, dolorum, officiis
+              blanditiis perspiciatis aperiam dolore exercitationem maxime eaque
+              earum repellendus adipisci accusantium!
+            </p>
+          </div>
+          <div class="about-technologies">
+            <h3>Technologies</h3>
+            <ul class="tech-list">
+              <li><i class="bx bxl-html5"></i>HTML</li>
+              <li><i class="bx bxl-css3"></i>CSS</li>
+              <li><i class="bx bxl-javascript"></i>JavaScript</li>
+              <li><i class="bx bxl-python"></i>Python</li>
+              <li><i class="bx bxl-java"></i>Java</li>
+              <li><i class="bx bxl-linux"></i>Linux</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="Projects">
+      <div class="container">
+        <h2 class="section-title">My Projects</h2>
+        <div class="projects-container">
+          <div class="project">
+            <div class="project-img">
+              <img src="./img/project1.png" alt="project1" />
+            </div>
+            <div class="project-content">
+              <h3>Project 1</h3>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Quisquam quos, voluptates, quod, quas dolorum quae quia
+                quibusdam nemo voluptatum doloremque quidem.
+              </p>
+              <div class="project-links">
+                <a
+                  href="https://theofernandezz.github.io/interactive-dashboard"
+                  class="project-btn"
+                  >View Project</a
+                >
+                <a
+                  href="https://github.com/theofernandezz/interactive-dashboard"
+                  class="project-btn"
+                  >View Code</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Me Section -->
+    <section id="Contact">
+      <div class="container">
+        <h2 class="section-title">Contact Me</h2>
+        <div class="contact-container">
+          <form
+            action="https://formsubmit.co/theo@netflux.com.ar"
+            method="POST"
+            class="contact-form"
+          >
+            <div class="form-group">
+              <input type="text" name="name" placeholder="Name" required />
+            </div>
+            <div class="form-group">
+              <input type="email" name="email" placeholder="Email" required />
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                name="subject"
+                placeholder="Subject"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <textarea
+                name="message"
+                placeholder="Message"
+                required
+              ></textarea>
+            </div>
+            <!-- Redirect after submission -->
+            <input
+              type="hidden"
+              name="_next"
+              value="https://yoursite.com/thanks.html"
+            />
+            <!-- Prevents spam -->
+            <input type="hidden" name="_captcha" value="true" />
+            <button type="submit" class="primary-btn">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="container footer-content">
+        <p>&copy; 2024 Theo Fernandez Beraldi</p>
+        <div class="social-links">
+          <a href="https://github.com/theo" target="_blank">
+            <i class="bx bxl-github"></i>
+          </a>
+          <a href="https://linkedin.com/in/theo" target="_blank">
+            <i class="bx bxl-linkedin-square"></i>
+          </a>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="scripts.js"></script>
+  </body>
+</html>
