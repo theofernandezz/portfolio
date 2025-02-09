@@ -18,7 +18,13 @@
     <!-- Navigation Bar -->
     <header>
       <nav class="nav-bar container">
-        <ul>
+        <!-- Hamburger menu button for mobile -->
+        <div class="menu-btn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <ul class="nav-menu">
           <li><a href="#hero">Home</a></li>
           <li><a href="#About">About Me</a></li>
           <li><a href="#Projects">Projects</a></li>
@@ -130,11 +136,7 @@
       <div class="container">
         <h2 class="section-title">Contact Me</h2>
         <div class="contact-container">
-          <form
-            action="https://formsubmit.co/theo@netflux.com.ar"
-            method="POST"
-            class="contact-form"
-          >
+          <form class="contact-form">
             <div class="form-group">
               <input type="text" name="name" placeholder="Name" required />
             </div>
@@ -156,14 +158,6 @@
                 required
               ></textarea>
             </div>
-            <!-- Redirect after submission -->
-            <input
-              type="hidden"
-              name="_next"
-              value="https://yoursite.com/thanks.html"
-            />
-            <!-- Prevents spam -->
-            <input type="hidden" name="_captcha" value="true" />
             <button type="submit" class="primary-btn">Send Message</button>
           </form>
         </div>

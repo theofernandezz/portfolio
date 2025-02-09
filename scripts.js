@@ -1,6 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
   // Smooth scrolling for navigation links
   const navLinks = document.querySelectorAll('a[href^="#"]');
+  const menuBtn = document.querySelector(".menu-btn");
+  const navMenu = document.querySelector(".nav-menu");
+  const body = document.body;
 
   navLinks.forEach((link) => {
     link.addEventListener("click", function (e) {
@@ -34,14 +37,15 @@ document.addEventListener("DOMContentLoaded", () => {
       navbar.style.boxShadow = "none";
     }
 
-    // Hide/show navbar on scroll
-    if (scrollTop > lastScrollTop && scrollTop > navbarHeight) {
-      navbar.style.transform = `translateY(-${navbarHeight}px)`;
+    // Modified hide/show navbar logic
+    if (scrollTop > lastScrollTop && scrollTop > navbarHeight * 2) {
+      // Increased threshold
+      navbar.style.transform = "translateY(-100%)";
     } else {
       navbar.style.transform = "translateY(0)";
     }
 
-    lastScrollTop = scrollTop;
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // Handles elastic scroll on Safari
   });
 
   const sections = document.querySelectorAll("section");
@@ -81,23 +85,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  const contactForm = document.querySelector(".contact-form");
-
-  if (contactForm) {
-    // Handle contact form submission
-    contactForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const formData = new FormData(this);
-
-      console.log("Form submitted:", Object.fromEntries(formData));
-
-      alert("Thank you for your message! I will get back to you soon.");
-
-      this.reset();
-    });
-  }
-
   const projectImages = document.querySelectorAll(".project-img img");
 
   // Fade in project images on load
@@ -107,28 +94,124 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Replace the existing form handling code with this:
   const form = document.querySelector(".contact-form");
 
-  // Validate contact form before submission
-  function validateForm(e) {
-    const email = form.querySelector('input[type="email"]').value;
-    const name = form.querySelector('input[name="name"]').value;
-
-    if (name.length < 2) {
-      alert("Please enter a valid name");
+  if (form) {
+    form.addEventListener("submit", async function (e) {
       e.preventDefault();
-      return false;
-    }
 
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      alert("Please enter a valid email address");
-      e.preventDefault();
-      return false;
-    }
+      // Validate form
+      if (!validateForm(e)) return;
 
-    return true;
+      // Get form data
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData);
+
+      // Get the submit button
+      const submitBtn = form.querySelector('button[type="submit"]');
+
+      try {
+        // Show loading state
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Sending...";
+
+        // Send email using FormSubmit
+        const response = await fetch(
+          "https://formsubmit.co/ajax/theo@netflux.com.ar",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify(data),
+          }
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to send message");
+        }
+
+        // Show success message
+        alert("Thank you for your message! I will get back to you soon.");
+        form.reset();
+      } catch (error) {
+        // Show error message
+        alert(
+          "Sorry, there was an error sending your message. Please try again."
+        );
+        console.error("Form submission error:", error);
+      } finally {
+        // Always reset button state
+        submitBtn.disabled = false;
+        submitBtn.textContent = "Send Message";
+      }
+    });
+
+    function validateForm(e) {
+      const email = form.querySelector('input[type="email"]').value;
+      const name = form.querySelector('input[name="name"]').value;
+
+      if (name.length < 2) {
+        alert("Please enter a valid name");
+        return false;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        alert("Please enter a valid email address");
+        return false;
+      }
+
+      return true;
+    }
   }
 
-  form.addEventListener("submit", validateForm);
+  const overlay = document.createElement(`div`);
+  overlay.classList.add(`menu-overlay`);
+  body.appendChild(overlay);
+
+  // Toggle mobile menu
+  menuBtn.addEventListener("click", () => {
+    menuBtn.classList.toggle("active");
+    navMenu.classList.toggle("active");
+    overlay.classList.toggle("active");
+
+    // Toggle body scroll
+    if (menuBtn.classList.contains("active")) {
+      body.style.overflow = "hidden";
+    } else {
+      body.style.overflow = "";
+    }
+  });
+
+  // close menu when clicking overlay
+  overlay.addEventListener("click", () => {
+    menuBtn.classList.remove("active");
+    navMenu.classList.remove("active");
+    overlay.classList.remove("active");
+    body.style.overflow = "";
+  });
+
+  // close menu when clicking menu items
+  const navLinksMobile = document.querySelectorAll(".nav-menu a");
+  navLinksMobile.forEach((link) => {
+    link.addEventListener("click", () => {
+      menuBtn.classList.remove("active");
+      navMenu.classList.remove("active");
+      overlay.classList.remove("active");
+      body.style.overflow = "";
+    });
+  });
+
+  // close menu on window resize
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) {
+      menuBtn.classList.remove("active");
+      navMenu.classList.remove("active");
+      overlay.classList.remove("active");
+      body.style.overflow = "";
+    }
+  });
 });
