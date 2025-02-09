@@ -45,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
       navbar.style.transform = "translateY(0)";
     }
 
-    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // Handles elastic scroll on Safari
+    lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
   });
 
   const sections = document.querySelectorAll("section");
@@ -94,7 +94,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Replace the existing form handling code with this:
   const form = document.querySelector(".contact-form");
 
   if (form) {
